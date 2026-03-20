@@ -159,6 +159,7 @@ h1 {
 }
 
 .card {
+  position: relative;
   display: grid;
   gap: 0.85rem;
   padding: 1.1rem;
@@ -166,6 +167,7 @@ h1 {
   border-radius: 1rem;
   background: rgba(30, 41, 59, 0.82);
   color: inherit;
+  cursor: pointer;
   transition:
     transform 150ms ease,
     border-color 150ms ease,
@@ -173,10 +175,16 @@ h1 {
 }
 
 .card:hover,
-.card:focus-within {
+.card:focus-within,
+.card:focus-visible {
   transform: translateY(-2px);
   border-color: rgba(56, 189, 248, 0.75);
   background: rgba(30, 41, 59, 0.96);
+}
+
+.card:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.5);
+  outline-offset: 3px;
 }
 
 .card__title {
@@ -223,6 +231,12 @@ h1 {
     border-color 150ms ease,
     background 150ms ease,
     transform 150ms ease;
+}
+
+.card__link,
+.tag {
+  position: relative;
+  z-index: 1;
 }
 
 .card__link:hover,

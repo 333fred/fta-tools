@@ -14,6 +14,35 @@
 
 const toolSections = [
   {
+    title: "Event Planning and Analytics",
+    description: "Scheduling and cycle-time tools that can help FTAs evaluate event flow.",
+    items: [
+      {
+        name: "Cycle Time Reports",
+        resourceUrl: "http://lopreiato.me/frc-cycle-times/",
+        sourceUrl: "https://github.com/phil-lopreiato/frc-cycle-times",
+        maintainer: "Phil Lopreiato",
+        description: "Cycle-time reporting for reviewing match throughput and field timing trends.",
+        tags: ["cycle time", "reports", "analytics"]
+      },
+      {
+        name: "Schedule Builder",
+        resourceUrl: "https://lopreiato.me/frc-schedule-builder/",
+        sourceUrl: "https://github.com/phil-lopreiato/frc-schedule-builder",
+        maintainer: "Phil Lopreiato",
+        description: "Build event schedules with a web interface tailored to FRC timing needs.",
+        tags: ["schedule", "planning", "builder"]
+      },
+      {
+        name: "Schedule Builder",
+        resourceUrl: "https://frc-scheduler.roadfeldt.com:8088/",
+        maintainer: "Chris Roadfeldt",
+        description: "Alternative schedule builder deployment for generating event schedules.",
+        tags: ["schedule", "planning", "builder"]
+      }
+    ]
+  },
+  {
     title: "Official FIRST Resources",
     description: "Core sites that are regularly useful before and during events.",
     items: [
@@ -32,11 +61,18 @@ const toolSections = [
         tags: ["manual", "resources", "official"]
       },
       {
-        name: "Competition Manual and Q&A",
-        resourceUrl: "https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system",
+        name: "Game Manual",
+        resourceUrl: "https://www.firstinspires.org/programs/frc/game-and-season",
         maintainer: "FIRST",
-        description: "Quick jump point for the current manual and official rules questions.",
-        tags: ["rules", "manual", "q&a"]
+        description: "Direct link to the current FRC game manual and official season materials.",
+        tags: ["game manual", "rules", "season"]
+      },
+      {
+        name: "Field Manual",
+        resourceUrl: "https://www.firstinspires.org/resources/library/frc/playing-field",
+        maintainer: "FIRST",
+        description: "Direct link to current field resources, drawings, and field manual materials.",
+        tags: ["field manual", "field", "drawings"]
       },
       {
         name: "FRC Q&A",
@@ -97,35 +133,6 @@ const toolSections = [
         tags: ["community", "forum", "support"]
       }
     ]
-  },
-  {
-    title: "Event Planning and Analytics",
-    description: "Scheduling and cycle-time tools that can help FTAs evaluate event flow.",
-    items: [
-      {
-        name: "Cycle Time Reports",
-        resourceUrl: "http://lopreiato.me/frc-cycle-times/",
-        sourceUrl: "https://github.com/phil-lopreiato/frc-cycle-times",
-        maintainer: "Phil Lopreiato",
-        description: "Cycle-time reporting for reviewing match throughput and field timing trends.",
-        tags: ["cycle time", "reports", "analytics"]
-      },
-      {
-        name: "Schedule Builder",
-        resourceUrl: "https://lopreiato.me/frc-schedule-builder/",
-        sourceUrl: "https://github.com/phil-lopreiato/frc-schedule-builder",
-        maintainer: "Phil Lopreiato",
-        description: "Build event schedules with a web interface tailored to FRC timing needs.",
-        tags: ["schedule", "planning", "builder"]
-      },
-      {
-        name: "Schedule Builder",
-        resourceUrl: "https://frc-scheduler.roadfeldt.com:8088/",
-        maintainer: "Chris Roadfeldt",
-        description: "Alternative schedule builder deployment for generating event schedules.",
-        tags: ["schedule", "planning", "builder"]
-      }
-    ]
   }
 ];
 
@@ -155,6 +162,10 @@ function createTagList(tags) {
 function createCard(item) {
   const card = document.createElement("article");
   card.className = "card";
+  card.tabIndex = 0;
+  card.setAttribute("role", "link");
+  card.setAttribute("aria-label", `${item.name} resource (opens in a new tab)`);
+  card.dataset.resourceUrl = item.resourceUrl;
 
   const title = document.createElement("h3");
   title.className = "card__title";
@@ -166,22 +177,18 @@ function createCard(item) {
 
   const maintainer = document.createElement("p");
   maintainer.className = "card__maintainer";
-  maintainer.innerHTML = `<span class="card__maintainer-label">Maintainer:</span> ${item.maintainer}`;
+
+  const maintainerLabel = document.createElement("span");
+  maintainerLabel.className = "card__maintainer-label";
+  maintainerLabel.textContent = "Maintainer: ";
+
+  maintainer.append(maintainerLabel, item.maintainer);
 
   const footer = document.createElement("div");
   footer.className = "card__footer";
 
   const links = document.createElement("div");
   links.className = "card__links";
-
-  const resourceLink = document.createElement("a");
-  resourceLink.className = "card__link";
-  resourceLink.href = item.resourceUrl;
-  resourceLink.target = "_blank";
-  resourceLink.rel = "noreferrer noopener";
-  resourceLink.textContent = "Open resource";
-  resourceLink.setAttribute("aria-label", `${item.name} resource (opens in a new tab)`);
-  links.append(resourceLink);
 
   if (item.sourceUrl) {
     const sourceLink = document.createElement("a");
@@ -198,6 +205,16 @@ function createCard(item) {
   card.append(title, description, footer);
 
   return card;
+}
+
+function openCardResource(card) {
+  const { resourceUrl } = card.dataset;
+
+  if (!resourceUrl) {
+    return;
+  }
+
+  window.open(resourceUrl, "_blank", "noopener,noreferrer");
 }
 
 function matchesSearch(item, query) {
@@ -260,6 +277,35 @@ function renderSections(query = "") {
 
 searchInput.addEventListener("input", (event) => {
   renderSections(event.target.value.trim().toLowerCase());
+});
+
+sectionsRoot.addEventListener("click", (event) => {
+  if (!(event.target instanceof Element) || event.target.closest(".card__link")) {
+    return;
+  }
+
+  const card = event.target.closest(".card");
+
+  if (!card) {
+    return;
+  }
+
+  openCardResource(card);
+});
+
+sectionsRoot.addEventListener("keydown", (event) => {
+  if (!(event.target instanceof Element) || event.target.closest(".card__link")) {
+    return;
+  }
+
+  const card = event.target.closest(".card");
+
+  if (!card || (event.key !== "Enter" && event.key !== " ")) {
+    return;
+  }
+
+  event.preventDefault();
+  openCardResource(card);
 });
 
 renderSections();
