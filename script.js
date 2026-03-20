@@ -202,7 +202,24 @@ function createCard(item) {
   }
 
   footer.append(maintainer, links, createTagList(item.tags));
-  card.append(title, description, footer);
+
+  const externalIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  externalIcon.setAttribute("class", "card__external-icon");
+  externalIcon.setAttribute("aria-hidden", "true");
+  externalIcon.setAttribute("viewBox", "0 0 24 24");
+  externalIcon.setAttribute("fill", "none");
+  externalIcon.setAttribute("stroke", "currentColor");
+  externalIcon.setAttribute("stroke-width", "2");
+  externalIcon.setAttribute("stroke-linecap", "round");
+  externalIcon.setAttribute("stroke-linejoin", "round");
+
+  const iconBox = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  iconBox.setAttribute("d", "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6");
+  const iconArrow = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  iconArrow.setAttribute("d", "M15 3h6v6M10 14L21 3");
+  externalIcon.append(iconBox, iconArrow);
+
+  card.append(title, description, footer, externalIcon);
 
   return card;
 }

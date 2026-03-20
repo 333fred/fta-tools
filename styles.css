@@ -202,6 +202,7 @@ h1 {
 .card__title {
   margin: 0;
   font-size: 1.05rem;
+  padding-right: 1.5rem;
 }
 
 .card__description {
@@ -281,6 +282,26 @@ h1 {
 .card__footer {
   display: grid;
   gap: 0.8rem;
+}
+
+.card__external-icon {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--text-muted);
+  opacity: 0.45;
+  pointer-events: none;
+  transition:
+    opacity 150ms ease,
+    color 150ms ease;
+}
+
+.card:hover .card__external-icon,
+.card:focus-visible .card__external-icon {
+  opacity: 1;
+  color: var(--brand);
 }
 
 .empty-state {
