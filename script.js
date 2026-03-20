@@ -4,7 +4,9 @@
   Each item should look like:
   {
     name: "Tool name",
-    url: "https://example.com",
+    resourceUrl: "https://example.com",
+    sourceUrl: "https://github.com/example/project", // optional
+    maintainer: "Who maintains it",
     description: "Why an FTA would open it",
     tags: ["keyword", "another keyword"]
   }
@@ -17,25 +19,29 @@ const toolSections = [
     items: [
       {
         name: "FRC Events",
-        url: "https://frc-events.firstinspires.org/",
+        resourceUrl: "https://frc-events.firstinspires.org/",
+        maintainer: "FIRST",
         description: "Official schedules, match results, rankings, and event details.",
         tags: ["events", "results", "schedules"]
       },
       {
         name: "FRC Resource Library",
-        url: "https://www.firstinspires.org/resource-library/frc",
+        resourceUrl: "https://www.firstinspires.org/resource-library/frc",
+        maintainer: "FIRST",
         description: "FIRST's central home for FRC manuals, updates, and season resources.",
         tags: ["manual", "resources", "official"]
       },
       {
         name: "Competition Manual and Q&A",
-        url: "https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system",
+        resourceUrl: "https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system",
+        maintainer: "FIRST",
         description: "Quick jump point for the current manual and official rules questions.",
         tags: ["rules", "manual", "q&a"]
       },
       {
         name: "FRC Q&A",
-        url: "https://frc-qa.firstinspires.org/qa",
+        resourceUrl: "https://frc-qa.firstinspires.org/qa",
+        maintainer: "FIRST",
         description: "Browse official questions and answers about the game and rules.",
         tags: ["questions", "rules", "clarifications"]
       }
@@ -47,19 +53,25 @@ const toolSections = [
     items: [
       {
         name: "WPILib Docs",
-        url: "https://docs.wpilib.org/en/stable/",
+        resourceUrl: "https://docs.wpilib.org/en/stable/",
+        sourceUrl: "https://github.com/wpilibsuite/frc-docs",
+        maintainer: "WPILib Suite",
         description: "Primary documentation for FRC control system software and configuration.",
         tags: ["wpilib", "software", "docs"]
       },
       {
         name: "WPILib ScreenSteps",
-        url: "https://docs.wpilib.org/en/stable/docs/zero-to-robot/introduction.html",
+        resourceUrl: "https://docs.wpilib.org/en/stable/docs/zero-to-robot/introduction.html",
+        sourceUrl: "https://github.com/wpilibsuite/frc-docs",
+        maintainer: "WPILib Suite",
         description: "Step-by-step control system setup instructions and core bring-up guidance.",
         tags: ["setup", "control system", "network"]
       },
       {
         name: "AdvantageScope",
-        url: "https://www.advantagescope.org/",
+        resourceUrl: "https://www.advantagescope.org/",
+        sourceUrl: "https://github.com/Mechanical-Advantage/AdvantageScope",
+        maintainer: "Mechanical Advantage",
         description: "Useful for reviewing logs and telemetry when teams are debugging behavior.",
         tags: ["logs", "telemetry", "analysis"]
       }
@@ -71,13 +83,16 @@ const toolSections = [
     items: [
       {
         name: "The Blue Alliance",
-        url: "https://www.thebluealliance.com/",
+        resourceUrl: "https://www.thebluealliance.com/",
+        sourceUrl: "https://github.com/the-blue-alliance/the-blue-alliance",
+        maintainer: "The Blue Alliance contributors",
         description: "Community database of teams, events, and match history.",
         tags: ["teams", "history", "stats"]
       },
       {
         name: "Chief Delphi",
-        url: "https://www.chiefdelphi.com/",
+        resourceUrl: "https://www.chiefdelphi.com/",
+        maintainer: "Chief Delphi",
         description: "Community discussions and past troubleshooting threads.",
         tags: ["community", "forum", "support"]
       }
@@ -109,12 +124,8 @@ function createTagList(tags) {
 }
 
 function createCard(item) {
-  const card = document.createElement("a");
+  const card = document.createElement("article");
   card.className = "card";
-  card.href = item.url;
-  card.target = "_blank";
-  card.rel = "noreferrer noopener";
-  card.setAttribute("aria-label", `${item.name} (opens in a new tab)`);
 
   const title = document.createElement("h3");
   title.className = "card__title";
@@ -124,20 +135,51 @@ function createCard(item) {
   description.className = "card__description";
   description.textContent = item.description;
 
-  const meta = document.createElement("div");
-  meta.className = "card__meta";
+  const maintainer = document.createElement("p");
+  maintainer.className = "card__maintainer";
+  maintainer.innerHTML = `<span class="card__maintainer-label">Maintainer:</span> ${item.maintainer}`;
 
-  const openText = document.createElement("span");
-  openText.textContent = "Open link";
+  const footer = document.createElement("div");
+  footer.className = "card__footer";
 
-  meta.append(createTagList(item.tags), openText);
-  card.append(title, description, meta);
+  const links = document.createElement("div");
+  links.className = "card__links";
+
+  const resourceLink = document.createElement("a");
+  resourceLink.className = "card__link";
+  resourceLink.href = item.resourceUrl;
+  resourceLink.target = "_blank";
+  resourceLink.rel = "noreferrer noopener";
+  resourceLink.textContent = "Open resource";
+  resourceLink.setAttribute("aria-label", `${item.name} resource (opens in a new tab)`);
+  links.append(resourceLink);
+
+  if (item.sourceUrl) {
+    const sourceLink = document.createElement("a");
+    sourceLink.className = "card__link";
+    sourceLink.href = item.sourceUrl;
+    sourceLink.target = "_blank";
+    sourceLink.rel = "noreferrer noopener";
+    sourceLink.textContent = "View source";
+    sourceLink.setAttribute("aria-label", `${item.name} source (opens in a new tab)`);
+    links.append(sourceLink);
+  }
+
+  footer.append(maintainer, links, createTagList(item.tags));
+  card.append(title, description, footer);
 
   return card;
 }
 
 function matchesSearch(item, query) {
-  const haystack = [item.name, item.description, ...(item.tags || [])]
+  const haystack = [
+    item.name,
+    item.description,
+    item.maintainer,
+    item.resourceUrl,
+    item.sourceUrl || "",
+    ...(item.tags || [])
+  ]
     .join(" ")
     .toLowerCase();
 

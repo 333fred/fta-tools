@@ -165,7 +165,6 @@ h1 {
   border: 1px solid rgba(148, 163, 184, 0.18);
   border-radius: 1rem;
   background: rgba(30, 41, 59, 0.82);
-  text-decoration: none;
   color: inherit;
   transition:
     transform 150ms ease,
@@ -174,15 +173,10 @@ h1 {
 }
 
 .card:hover,
-.card:focus-visible {
+.card:focus-within {
   transform: translateY(-2px);
   border-color: rgba(56, 189, 248, 0.75);
   background: rgba(30, 41, 59, 0.96);
-}
-
-.card:focus-visible {
-  outline: 2px solid rgba(56, 189, 248, 0.5);
-  outline-offset: 3px;
 }
 
 .card__title {
@@ -196,15 +190,51 @@ h1 {
   line-height: 1.55;
 }
 
-.card__meta {
+.card__maintainer {
+  margin: 0;
+  color: #bae6fd;
+  font-size: 0.94rem;
+}
+
+.card__maintainer-label {
+  color: var(--text-muted);
+}
+
+.card__links {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.65rem;
   margin-top: auto;
-  color: var(--brand);
+}
+
+.card__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  border-radius: 0.8rem;
+  background: rgba(56, 189, 248, 0.1);
+  color: #e0f2fe;
   font-size: 0.92rem;
   font-weight: 600;
+  text-decoration: none;
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+.card__link:hover,
+.card__link:focus-visible {
+  border-color: rgba(56, 189, 248, 0.8);
+  background: rgba(56, 189, 248, 0.18);
+  transform: translateY(-1px);
+}
+
+.card__link:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.5);
+  outline-offset: 2px;
 }
 
 .tag-list {
@@ -220,6 +250,11 @@ h1 {
   color: #bae6fd;
   font-size: 0.82rem;
   font-weight: 600;
+}
+
+.card__footer {
+  display: grid;
+  gap: 0.8rem;
 }
 
 .empty-state {
