@@ -97,6 +97,35 @@ const toolSections = [
         tags: ["community", "forum", "support"]
       }
     ]
+  },
+  {
+    title: "Event Planning and Analytics",
+    description: "Scheduling and cycle-time tools that can help FTAs evaluate event flow.",
+    items: [
+      {
+        name: "Cycle Time Reports",
+        resourceUrl: "http://lopreiato.me/frc-cycle-times/",
+        sourceUrl: "https://github.com/phil-lopreiato/frc-cycle-times",
+        maintainer: "Phil Lopreiato",
+        description: "Cycle-time reporting for reviewing match throughput and field timing trends.",
+        tags: ["cycle time", "reports", "analytics"]
+      },
+      {
+        name: "Schedule Builder",
+        resourceUrl: "https://lopreiato.me/frc-schedule-builder/",
+        sourceUrl: "https://github.com/phil-lopreiato/frc-schedule-builder",
+        maintainer: "Phil Lopreiato",
+        description: "Build event schedules with a web interface tailored to FRC timing needs.",
+        tags: ["schedule", "planning", "builder"]
+      },
+      {
+        name: "Schedule Builder",
+        resourceUrl: "https://frc-scheduler.roadfeldt.com:8088/",
+        maintainer: "Chris Roadfeldt",
+        description: "Alternative schedule builder deployment for generating event schedules.",
+        tags: ["schedule", "planning", "builder"]
+      }
+    ]
   }
 ];
 
