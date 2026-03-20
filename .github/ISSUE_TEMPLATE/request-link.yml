@@ -1,0 +1,88 @@
+name: Request a new link
+description: Ask for a new resource to be added to fta.tools
+title: "[Link Request]: "
+labels:
+  - link-request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill out this form with the exact information needed to add a new card to `fta.tools`.
+  - type: dropdown
+    id: section
+    attributes:
+      label: Section
+      description: Which section should this link appear in?
+      options:
+        - Event Planning and Analytics
+        - Official FIRST Resources
+        - Robot Software and Diagnostics
+        - Community Reference
+        - New section
+    validations:
+      required: true
+  - type: input
+    id: tool-name
+    attributes:
+      label: Tool name
+      description: The display name that should appear on the card.
+      placeholder: Schedule Builder
+    validations:
+      required: true
+  - type: input
+    id: resource-url
+    attributes:
+      label: Resource URL
+      description: The main webpage that should open when the card is clicked.
+      placeholder: https://example.com/tool
+    validations:
+      required: true
+  - type: input
+    id: source-url
+    attributes:
+      label: Source URL
+      description: Public repository or source page, if there is one.
+      placeholder: https://github.com/example/project
+    validations:
+      required: false
+  - type: input
+    id: maintainer
+    attributes:
+      label: Maintainer
+      description: Person, team, or organization responsible for the resource.
+      placeholder: FIRST
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Short summary of why an FTA would use this resource.
+      placeholder: Direct PDF link to the current official field manual.
+    validations:
+      required: true
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated keywords for search.
+      placeholder: field manual, field, pdf
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Any context that would help place or word the card correctly.
+      placeholder: This belongs near the game manual and should stay in the official resources section.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I checked that this link is not already listed on the site.
+          required: true
+        - label: I included the maintainer and the source URL when one is available.
+          required: true
