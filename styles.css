@@ -299,7 +299,8 @@ h1 {
 }
 
 .card:hover .card__external-icon,
-.card:focus-visible .card__external-icon {
+.card:focus-visible .card__external-icon,
+.card:focus-within .card__external-icon {
   opacity: 1;
   color: var(--brand);
 }
