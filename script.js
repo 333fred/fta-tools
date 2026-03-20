@@ -69,10 +69,10 @@ const toolSections = [
       },
       {
         name: "Field Manual",
-        resourceUrl: "https://www.firstinspires.org/resources/library/frc/playing-field",
+        resourceUrl: "https://firstfrc.blob.core.windows.net/frc2026/FieldAssets/field-manual.pdf",
         maintainer: "FIRST",
-        description: "Direct link to current field resources, drawings, and field manual materials.",
-        tags: ["field manual", "field", "drawings"]
+        description: "Direct PDF link to the current official field manual.",
+        tags: ["field manual", "field", "pdf"]
       },
       {
         name: "FRC Q&A",
