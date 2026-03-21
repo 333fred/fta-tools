@@ -26,6 +26,13 @@ const toolSections = [
         tags: ["cycle time", "reports", "analytics"]
       },
       {
+        name: "Nexus for FRC",
+        resourceUrl: "https://frc.nexus/",
+        maintainer: "Evan Forbes",
+        description: "An event management system for FIRST Robotics Competition events.",
+        tags: ["nexus", "queue", "inspection", "csa", "lri", "fta", "notepad"]
+      },
+      {
         name: "Schedule Builder",
         resourceUrl: "https://lopreiato.me/frc-schedule-builder/",
         sourceUrl: "https://github.com/phil-lopreiato/frc-schedule-builder",
