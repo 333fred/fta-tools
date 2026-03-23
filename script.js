@@ -169,18 +169,13 @@ function createTagList(tags) {
 function createCard(item) {
   const card = document.createElement("article");
   card.className = "card";
-  card.tabIndex = 0;
-  card.setAttribute("role", "link");
-  card.setAttribute("aria-label", `${item.name} resource (opens in a new tab)`);
-  card.dataset.resourceUrl = item.resourceUrl;
 
   const mainLink = document.createElement("a");
   mainLink.className = "card__main-link";
   mainLink.href = item.resourceUrl;
   mainLink.target = "_blank";
   mainLink.rel = "noreferrer noopener";
-  mainLink.tabIndex = -1;
-  mainLink.setAttribute("aria-hidden", "true");
+  mainLink.setAttribute("aria-label", `${item.name} resource (opens in a new tab)`);
 
   const title = document.createElement("h3");
   title.className = "card__title";
@@ -237,16 +232,6 @@ function createCard(item) {
   card.append(mainLink, title, description, footer, externalIcon);
 
   return card;
-}
-
-function openCardResource(card) {
-  const { resourceUrl } = card.dataset;
-
-  if (!resourceUrl) {
-    return;
-  }
-
-  window.open(resourceUrl, "_blank", "noopener,noreferrer");
 }
 
 function matchesSearch(item, query) {
@@ -309,35 +294,6 @@ function renderSections(query = "") {
 
 searchInput.addEventListener("input", (event) => {
   renderSections(event.target.value.trim().toLowerCase());
-});
-
-sectionsRoot.addEventListener("click", (event) => {
-  if (!(event.target instanceof Element) || event.target.closest(".card__link") || event.target.closest(".card__main-link")) {
-    return;
-  }
-
-  const card = event.target.closest(".card");
-
-  if (!card) {
-    return;
-  }
-
-  openCardResource(card);
-});
-
-sectionsRoot.addEventListener("keydown", (event) => {
-  if (!(event.target instanceof Element) || event.target.closest(".card__link")) {
-    return;
-  }
-
-  const card = event.target.closest(".card");
-
-  if (!card || (event.key !== "Enter" && event.key !== " ")) {
-    return;
-  }
-
-  event.preventDefault();
-  openCardResource(card);
 });
 
 renderSections();
