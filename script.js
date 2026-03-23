@@ -174,6 +174,14 @@ function createCard(item) {
   card.setAttribute("aria-label", `${item.name} resource (opens in a new tab)`);
   card.dataset.resourceUrl = item.resourceUrl;
 
+  const mainLink = document.createElement("a");
+  mainLink.className = "card__main-link";
+  mainLink.href = item.resourceUrl;
+  mainLink.target = "_blank";
+  mainLink.rel = "noreferrer noopener";
+  mainLink.tabIndex = -1;
+  mainLink.setAttribute("aria-hidden", "true");
+
   const title = document.createElement("h3");
   title.className = "card__title";
   title.textContent = item.name;
@@ -226,7 +234,7 @@ function createCard(item) {
   iconArrow.setAttribute("d", "M15 3h6v6M10 14L21 3");
   externalIcon.append(iconBox, iconArrow);
 
-  card.append(title, description, footer, externalIcon);
+  card.append(mainLink, title, description, footer, externalIcon);
 
   return card;
 }
@@ -304,7 +312,7 @@ searchInput.addEventListener("input", (event) => {
 });
 
 sectionsRoot.addEventListener("click", (event) => {
-  if (!(event.target instanceof Element) || event.target.closest(".card__link")) {
+  if (!(event.target instanceof Element) || event.target.closest(".card__link") || event.target.closest(".card__main-link")) {
     return;
   }
 

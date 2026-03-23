@@ -228,6 +228,12 @@ h1 {
   margin-top: auto;
 }
 
+.card__main-link {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
 .card__link {
   display: inline-flex;
   align-items: center;
