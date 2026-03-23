@@ -187,14 +187,19 @@ h1 {
 }
 
 .card:hover,
-.card:focus-within,
-.card:focus-visible {
+.card:focus-within {
   transform: translateY(-2px);
   border-color: rgba(56, 189, 248, 0.75);
   background: rgba(30, 41, 59, 0.96);
 }
 
-.card:focus-visible {
+.card__main-link {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.card__main-link:focus-visible {
   outline: 2px solid rgba(56, 189, 248, 0.5);
   outline-offset: 3px;
 }
