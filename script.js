@@ -69,9 +69,9 @@ const toolSections = [
       },
       {
         name: "Game Manual",
-        resourceUrl: "https://www.firstinspires.org/programs/frc/game-and-season",
+        resourceUrl: "https://firstfrc.blob.core.windows.net/frc2026/Manual/2026GameManual.pdf",
         maintainer: "FIRST",
-        description: "Direct link to the current FRC game manual and official season materials.",
+        description: "Direct PDF link to the current FRC game manual.",
         tags: ["game manual", "rules", "season"]
       },
       {
