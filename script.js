@@ -61,13 +61,6 @@ const toolSections = [
         tags: ["events", "results", "schedules"]
       },
       {
-        name: "FRC Resource Library",
-        resourceUrl: "https://www.firstinspires.org/resources/library#first_robotics_competition",
-        maintainer: "FIRST",
-        description: "FIRST's central home for FRC manuals, updates, and season resources.",
-        tags: ["manual", "resources", "official"]
-      },
-      {
         name: "Game Manual",
         resourceUrl: "https://firstfrc.blob.core.windows.net/frc2026/Manual/2026GameManual.pdf",
         maintainer: "FIRST",
@@ -87,6 +80,13 @@ const toolSections = [
         maintainer: "FIRST",
         description: "Browse official questions and answers about the game and rules.",
         tags: ["questions", "rules", "clarifications"]
+      },
+      {
+        name: "FRC Resource Library",
+        resourceUrl: "https://www.firstinspires.org/resources/library#first_robotics_competition",
+        maintainer: "FIRST",
+        description: "FIRST's central home for FRC manuals, updates, and season resources.",
+        tags: ["manual", "resources", "official"]
       }
     ]
   },
