@@ -62,7 +62,7 @@ const toolSections = [
       },
       {
         name: "FRC Resource Library",
-        resourceUrl: "https://www.firstinspires.org/resource-library/frc",
+        resourceUrl: "https://www.firstinspires.org/resources/library#first_robotics_competition",
         maintainer: "FIRST",
         description: "FIRST's central home for FRC manuals, updates, and season resources.",
         tags: ["manual", "resources", "official"]
