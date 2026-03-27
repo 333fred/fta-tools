@@ -1,15 +1,73 @@
 :root {
   color-scheme: light dark;
-  --bg: #0f172a;
-  --bg-accent: #111c44;
-  --panel: rgba(15, 23, 42, 0.86);
-  --panel-border: rgba(148, 163, 184, 0.22);
-  --text: #e2e8f0;
-  --text-muted: #cbd5e1;
-  --brand: #38bdf8;
-  --brand-strong: #0ea5e9;
-  --shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
-  --card-shadow: 0 14px 30px rgba(15, 23, 42, 0.25);
+
+  /* Light theme (default) */
+  --bg: #f5f5f5;
+  --bg-accent: #eeeeee;
+  --panel: rgba(255, 255, 255, 0.92);
+  --panel-border: rgba(0, 0, 0, 0.12);
+  --text: #212121;
+  --text-muted: #616161;
+  --brand: #1976d2;
+  --brand-strong: #1565c0;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.10), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --code-bg: rgba(0, 0, 0, 0.06);
+  --input-border: rgba(0, 0, 0, 0.23);
+  --input-bg: #ffffff;
+  --input-focus: rgba(25, 118, 210, 0.5);
+  --section-bg: rgba(255, 255, 255, 0.85);
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.12);
+  --card-hover-border: rgba(25, 118, 210, 0.75);
+  --card-hover-bg: rgba(245, 248, 255, 0.98);
+  --tag-bg: rgba(25, 118, 210, 0.10);
+  --tag-color: #1565c0;
+  --link-border: rgba(25, 118, 210, 0.35);
+  --link-bg: rgba(25, 118, 210, 0.08);
+  --link-color: #1565c0;
+  --link-hover-border: rgba(25, 118, 210, 0.80);
+  --link-hover-bg: rgba(25, 118, 210, 0.16);
+  --maintainer-color: #1976d2;
+  --footer-link-color: #1565c0;
+  --footer-link-hover: #0d47a1;
+  --empty-border: rgba(0, 0, 0, 0.20);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark theme — material grays */
+    --bg: #121212;
+    --bg-accent: #1e1e1e;
+    --panel: rgba(30, 30, 30, 0.92);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --text: #e0e0e0;
+    --text-muted: #9e9e9e;
+    --brand: #90caf9;
+    --brand-strong: #42a5f5;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.50), 0 16px 40px rgba(0, 0, 0, 0.40);
+    --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.40), 0 8px 20px rgba(0, 0, 0, 0.30);
+    --code-bg: rgba(255, 255, 255, 0.08);
+    --input-border: rgba(255, 255, 255, 0.23);
+    --input-bg: rgba(255, 255, 255, 0.07);
+    --input-focus: rgba(144, 202, 249, 0.5);
+    --section-bg: rgba(30, 30, 30, 0.85);
+    --card-bg: rgba(40, 40, 40, 0.90);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-hover-border: rgba(144, 202, 249, 0.60);
+    --card-hover-bg: rgba(50, 50, 50, 0.96);
+    --tag-bg: rgba(144, 202, 249, 0.12);
+    --tag-color: #90caf9;
+    --link-border: rgba(144, 202, 249, 0.32);
+    --link-bg: rgba(144, 202, 249, 0.09);
+    --link-color: #90caf9;
+    --link-hover-border: rgba(144, 202, 249, 0.80);
+    --link-hover-bg: rgba(144, 202, 249, 0.18);
+    --maintainer-color: #90caf9;
+    --footer-link-color: #90caf9;
+    --footer-link-hover: #bbdefb;
+    --empty-border: rgba(255, 255, 255, 0.20);
+  }
 }
 
 * {
@@ -22,16 +80,14 @@ body {
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(56, 189, 248, 0.16), transparent 30%),
-    linear-gradient(180deg, var(--bg-accent), var(--bg));
+  background: linear-gradient(180deg, var(--bg-accent), var(--bg));
   color: var(--text);
 }
 
 code {
   padding: 0.15rem 0.35rem;
   border-radius: 0.4rem;
-  background: rgba(148, 163, 184, 0.15);
+  background: var(--code-bg);
   font-family:
     ui-monospace, SFMono-Regular, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
@@ -57,14 +113,6 @@ code {
   backdrop-filter: blur(18px);
 }
 
-.eyebrow {
-  margin: 0 0 0.75rem;
-  color: var(--brand);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 h1 {
   margin: 0;
   font-size: clamp(2.4rem, 7vw, 4.6rem);
@@ -84,15 +132,15 @@ h1 {
 .search input {
   width: min(34rem, 100%);
   padding: 0.95rem 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  border: 1px solid var(--input-border);
   border-radius: 0.9rem;
-  background: rgba(15, 23, 42, 0.7);
+  background: var(--input-bg);
   color: var(--text);
   font: inherit;
 }
 
 .search input:focus {
-  outline: 2px solid rgba(56, 189, 248, 0.5);
+  outline: 2px solid var(--input-focus);
   outline-offset: 2px;
 }
 
@@ -118,7 +166,7 @@ h1 {
   padding: 1.5rem;
   border: 1px solid var(--panel-border);
   border-radius: 1.35rem;
-  background: rgba(15, 23, 42, 0.74);
+  background: var(--section-bg);
   box-shadow: var(--card-shadow);
 }
 
@@ -148,9 +196,9 @@ h1 {
   display: grid;
   gap: 0.85rem;
   padding: 1.1rem;
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  border: 1px solid var(--card-border);
   border-radius: 1rem;
-  background: rgba(30, 41, 59, 0.82);
+  background: var(--card-bg);
   color: inherit;
   cursor: pointer;
   transition:
@@ -162,8 +210,8 @@ h1 {
 .card:hover,
 .card:focus-within {
   transform: translateY(-2px);
-  border-color: rgba(56, 189, 248, 0.75);
-  background: rgba(30, 41, 59, 0.96);
+  border-color: var(--card-hover-border);
+  background: var(--card-hover-bg);
 }
 
 .card__main-link {
@@ -173,7 +221,7 @@ h1 {
 }
 
 .card__main-link:focus-visible {
-  outline: 2px solid rgba(56, 189, 248, 0.5);
+  outline: 2px solid var(--input-focus);
   outline-offset: 3px;
 }
 
@@ -191,7 +239,7 @@ h1 {
 
 .card__maintainer {
   margin: 0;
-  color: #bae6fd;
+  color: var(--maintainer-color);
   font-size: 0.94rem;
 }
 
@@ -211,10 +259,10 @@ h1 {
   align-items: center;
   justify-content: center;
   padding: 0.55rem 0.8rem;
-  border: 1px solid rgba(56, 189, 248, 0.32);
+  border: 1px solid var(--link-border);
   border-radius: 0.8rem;
-  background: rgba(56, 189, 248, 0.1);
-  color: #e0f2fe;
+  background: var(--link-bg);
+  color: var(--link-color);
   font-size: 0.92rem;
   font-weight: 600;
   text-decoration: none;
@@ -232,13 +280,13 @@ h1 {
 
 .card__link:hover,
 .card__link:focus-visible {
-  border-color: rgba(56, 189, 248, 0.8);
-  background: rgba(56, 189, 248, 0.18);
+  border-color: var(--link-hover-border);
+  background: var(--link-hover-bg);
   transform: translateY(-1px);
 }
 
 .card__link:focus-visible {
-  outline: 2px solid rgba(56, 189, 248, 0.5);
+  outline: 2px solid var(--input-focus);
   outline-offset: 2px;
 }
 
@@ -251,8 +299,8 @@ h1 {
 .tag {
   padding: 0.22rem 0.55rem;
   border-radius: 999px;
-  background: rgba(56, 189, 248, 0.12);
-  color: #bae6fd;
+  background: var(--tag-bg);
+  color: var(--tag-color);
   font-size: 0.82rem;
   font-weight: 600;
 }
@@ -286,7 +334,7 @@ h1 {
 .empty-state {
   margin: 1rem 0 0;
   padding: 1rem 1.25rem;
-  border: 1px dashed rgba(148, 163, 184, 0.35);
+  border: 1px dashed var(--empty-border);
   border-radius: 1rem;
   color: var(--text-muted);
   text-align: center;
@@ -311,14 +359,14 @@ h1 {
 }
 
 .footer__link {
-  color: #bae6fd;
+  color: var(--footer-link-color);
   font-weight: 600;
   text-decoration: none;
 }
 
 .footer__link:hover,
 .footer__link:focus-visible {
-  color: #e0f2fe;
+  color: var(--footer-link-hover);
   text-decoration: underline;
 }
 
