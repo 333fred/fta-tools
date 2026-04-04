@@ -43,6 +43,7 @@ const toolSections = [
       {
         name: "Schedule Builder",
         resourceUrl: "https://frc-scheduler.roadfeldt.com:8088/",
+        sourceUrl: "https://github.com/croadfeldt/frc-scheduler-server",
         maintainer: "Chris Roadfeldt",
         description: "Alternative schedule builder deployment for generating event schedules.",
         tags: ["schedule", "planning", "builder"]
