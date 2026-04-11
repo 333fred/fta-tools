@@ -47,6 +47,14 @@ const toolSections = [
         maintainer: "Chris Roadfeldt",
         description: "Alternative schedule builder deployment for generating event schedules.",
         tags: ["schedule", "planning", "builder"]
+      },
+      {
+        name: "FRC Replay Finder",
+        resourceUrl: "https://rtfoley.github.io/frc-replay-finder/",
+        sourceUrl: "https://github.com/rtfoley/frc-replay-finder",
+        maintainer: "Ryan Foley",
+        description: "Finds options for when to schedule a match replay, to maximize gaps for the teams involved.",
+        tags: ["schedule", "replay"]
       }
     ]
   },
