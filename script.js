@@ -55,6 +55,14 @@ const toolSections = [
         maintainer: "Ryan Foley",
         description: "Finds options for when to schedule a match replay, to maximize gaps for the teams involved.",
         tags: ["schedule", "replay"]
+      },
+      {
+        name: "FRC Event Dashboard",
+        resourceUrl: "https://frcdashboard.bennettn.org/",
+        sourceUrl: "https://github.com/Bennett2977/FRC-Event-Dashboard",
+        maintainer: "Bennett Norris",
+        description: "Dashboard displaying active events, including match progress, ahead/behind status, and high scores.",
+        tags: ["event", "dashboard", "analytics"]
       }
     ]
   },
