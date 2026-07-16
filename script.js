@@ -92,6 +92,14 @@ const toolSections = [
         tags: ["field manual", "field", "pdf"]
       },
       {
+        name: "FMS Manual",
+        resourceUrl: "https://fms-manual.readthedocs.io/en/latest/index.html",
+        sourceUrl: "https://github.com/FIRSTRobotics/fms-manual",
+        maintainer: "FIRST",
+        description: "Reference for operating FMS.",
+        tags: ["fms", "manual", "field management system"]
+      },
+      {
         name: "FRC Q&A",
         resourceUrl: "https://frc-qa.firstinspires.org/qa",
         maintainer: "FIRST",
